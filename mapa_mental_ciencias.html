@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Mental – Guardiões do Planeta</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e3f2fd,#e8f5e9);color:#2b2b2b;padding:14px;line-height:1.5}
+  .wrap{max-width:960px;margin:0 auto}
+  header{background:linear-gradient(135deg,#2e7d32,#1565c0);color:#fff;border-radius:22px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.18);border:4px solid #ffd54f}
+  header h1{font-size:1.5rem;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+  header p{margin-top:8px;font-size:.95rem}
+  .mascote{font-size:2.5rem}
+  .central{background:linear-gradient(135deg,#00897b,#1e88e5);color:#fff;border-radius:20px;padding:18px;margin:16px 0;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.15)}
+  .central h2{font-size:1.15rem;margin-bottom:10px}
+  .linha{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  .linha span{background:rgba(255,255,255,.2);border-radius:20px;padding:6px 12px;font-size:.85rem;font-weight:bold}
+  .linha .a{color:#ffd54f;font-size:1.2rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:8px}
+  .card{background:#fff;border-radius:18px;padding:16px;box-shadow:0 5px 14px rgba(0,0,0,.1);border-top:8px solid var(--cor);display:flex;flex-direction:column}
+  .card .topo{display:flex;align-items:center;gap:10px}
+  .card .em{font-size:1.9rem}
+  .card h3{color:var(--cor);font-size:1.05rem;flex:1}
+  .card .resumo{margin:10px 0;font-size:.92rem;color:#444}
+  .vermais{background:#f4f6f8;border-radius:10px;padding:10px 12px;font-size:.9rem;color:#333;display:none;margin-bottom:10px}
+  .card.aberto .vermais{display:block;animation:pop .3s}
+  @keyframes pop{from{opacity:0}to{opacity:1}}
+  .bmais{background:var(--cor);color:#fff;border:none;border-radius:20px;padding:7px 14px;font-size:.85rem;cursor:pointer;font-family:inherit;align-self:flex-start;margin-bottom:10px}
+  .mini{background:#fff8e1;border-radius:10px;padding:10px;margin-top:auto}
+  .mini p{font-weight:bold;font-size:.88rem;margin-bottom:6px}
+  .mini button{display:block;width:100%;text-align:left;background:#fff;border:2px solid #ddd;border-radius:8px;padding:7px 10px;margin:4px 0;font-size:.85rem;cursor:pointer;font-family:inherit}
+  .mini button:hover{border-color:var(--cor)}
+  .mini button.certa{background:#c8e6c9;border-color:#43a047;font-weight:bold}
+  .mini button.errada{background:#ffcdd2;border-color:#e53935}
+  .mini .fb{display:none;font-size:.82rem;margin-top:5px;padding:5px 8px;border-radius:8px}
+  .mini .fb.ok{display:block;background:#e8f5e9;color:#2e7d32}
+  .mini .fb.no{display:block;background:#fff3e0;color:#e65100}
+  .resumao{background:#fff3e0;border:3px dashed #ff9800;border-radius:18px;padding:18px;margin:16px 0}
+  .resumao h2{color:#e65100;margin-bottom:8px}
+  .resumao .keys{display:flex;flex-wrap:wrap;gap:8px}
+  .resumao .k{background:#fff;border:2px solid #ffb74d;border-radius:16px;padding:6px 12px;font-size:.85rem;font-weight:bold;color:#e65100}
+  footer{text-align:center;color:#888;font-size:.82rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascote">🧠🌍🦸</div>
+    <h1>Mapa Mental — Guardiões do Planeta</h1>
+    <p>A porta de entrada da sua missão! Clique em "ver mais" e responda os mini-desafios. 🛡️<br>
+    <b>Unidade 5 – Resíduos</b> • <b>Unidade 6 – Uso dos recursos naturais</b></p>
+  </header>
+
+  <div class="central">
+    <h2>🔄 A história de um objeto (a ordem cai na prova!)</h2>
+    <div class="linha">
+      <span>1. Extração</span><span class="a">➜</span>
+      <span>2. Fabricação</span><span class="a">➜</span>
+      <span>3. Transporte</span><span class="a">➜</span>
+      <span>4. Consumo</span><span class="a">➜</span>
+      <span>5. Descarte</span>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="resumao">
+    <h2>⭐ Resumão da Prova — palavras-chave</h2>
+    <div class="keys">
+      <span class="k">Resíduo x Rejeito</span>
+      <span class="k">Chorume</span>
+      <span class="k">Lixão</span>
+      <span class="k">Aterro controlado</span>
+      <span class="k">Aterro sanitário</span>
+      <span class="k">Incineração</span>
+      <span class="k">Reciclagem</span>
+      <span class="k">Compostagem</span>
+      <span class="k">Coleta seletiva</span>
+      <span class="k">5 Rs</span>
+      <span class="k">Renovável x Não renovável</span>
+      <span class="k">Combustíveis fósseis</span>
+      <span class="k">Efeito estufa</span>
+      <span class="k">Aquecimento global</span>
+      <span class="k">Saneamento básico</span>
+      <span class="k">Cloro e flúor</span>
+      <span class="k">Erosão</span>
+    </div>
+  </div>
+
+  <footer>Use este mapa para começar. Depois vá para a Leitura Guiada! 💚💙</footer>
+</div>
+
+<script>
+const cards=[
+  {cor:'#2e7d32',em:'🛒',t:'Consumo, resíduo e rejeito',
+   resumo:'Consumir é usar produtos e serviços. Sobram resíduos (dá para reaproveitar) e rejeitos (não dá).',
+   mais:'Não geramos resíduos só na lixeira: eles surgem em toda a cadeia produtiva, do início ao fim.',
+   q:'O que ainda pode ser reaproveitado é o:',o:['Rejeito','Resíduo'],c:1,
+   ok:'Isso! Resíduo pode ser reciclado.',no:'É o resíduo que pode ser reaproveitado; rejeito não.'},
+  {cor:'#00897b',em:'🚮',t:'Destinos dos resíduos',
+   resumo:'Lixão (pior, céu aberto), aterro controlado (coberto com terra), aterro sanitário (o mais seguro) e incineração (queima).',
+   mais:'O aterro sanitário tem manta impermeável e coleta o chorume (líquido do lixo) e o gás metano.',
+   q:'Qual é o destino mais seguro?',o:['Lixão','Aterro sanitário'],c:1,
+   ok:'Certo! Ele protege o solo e trata o chorume.',no:'É o aterro sanitário, não o lixão.'},
+  {cor:'#43a047',em:'♻️',t:'Reciclagem e compostagem',
+   resumo:'Reciclar = material volta para a produção. Compostar = microrganismos transformam o orgânico em adubo.',
+   mais:'A reciclagem poupa recursos e gera renda a catadores. A lata de alumínio é o objeto mais reciclado no Brasil.',
+   q:'A compostagem produz:',o:['Plástico','Adubo (composto)'],c:1,
+   ok:'Boa! Vira adubo natural.',no:'A compostagem gera adubo, feito por microrganismos.'},
+  {cor:'#ef6c00',em:'🗂️',t:'Tipos de resíduos',
+   resumo:'Orgânicos, recicláveis, não recicláveis e perigosos. Cada um tem seu destino.',
+   mais:'Pilhas, baterias e remédios vencidos são perigosos: vão para postos de coleta específicos, nunca no lixo comum.',
+   q:'Pilhas usadas devem ir para:',o:['Lixo comum','Posto de coleta específico'],c:1,
+   ok:'Certo! São resíduos perigosos.',no:'Pilhas são perigosas: vão para posto específico.'},
+  {cor:'#558b2f',em:'✋',t:'Os 5 Rs',
+   resumo:'Repensar, Reduzir, Recusar, Reciclar e Reutilizar: o consumo consciente.',
+   mais:'Consertar em vez de comprar é Reutilizar. Levar sacola de pano é Reduzir. Refletir antes de comprar é Repensar.',
+   q:'Consertar em vez de comprar novo é:',o:['Reutilizar','Extrair'],c:0,
+   ok:'Isso! Dar nova vida = Reutilizar.',no:'É Reutilizar (dar nova vida ao objeto).'},
+  {cor:'#1e88e5',em:'🌱',t:'Recursos naturais',
+   resumo:'Renováveis (não acabam: água, vento, sol) e não renováveis (podem acabar: petróleo, carvão, minérios).',
+   mais:'Petróleo, gás natural e carvão mineral são os combustíveis fósseis (levam milhões de anos para se formar).',
+   q:'A água é um recurso:',o:['Renovável','Não renovável'],c:0,
+   ok:'Certo! A água se renova pelo ciclo.',no:'A água é renovável (faz parte de um ciclo).'},
+  {cor:'#c62828',em:'🏭',t:'Impactos e efeito estufa',
+   resumo:'Atividades humanas poluem água, ar e solo. Queimar combustíveis aumenta o efeito estufa.',
+   mais:'Atenção: o efeito estufa é NATURAL e importante. O problema é o excesso de gases, que causa o aquecimento global.',
+   q:'O efeito estufa é:',o:['Totalmente ruim','Natural (o problema é o excesso)'],c:1,
+   ok:'Boa! O problema é o excesso de gases.',no:'Ele é natural e importante; o problema é o excesso.'},
+  {cor:'#0277bd',em:'💧',t:'Água, esgoto e sustentabilidade',
+   resumo:'Saneamento básico cuida da água, do esgoto e do lixo. Cloro elimina micróbios; flúor previne cáries.',
+   mais:'Uso sustentável = atender às necessidades de hoje sem faltar para as futuras gerações (economizar água, energia solar).',
+   q:'O cloro na água serve para:',o:['Eliminar microrganismos','Prevenir cáries'],c:0,
+   ok:'Certo! O flúor é que previne cáries.',no:'O cloro elimina microrganismos; o flúor previne cáries.'}
+];
+
+const grid=document.getElementById('grid');
+cards.forEach((c,i)=>{
+  const d=document.createElement('div');
+  d.className='card';
+  d.style.setProperty('--cor',c.cor);
+  d.innerHTML=`
+    <div class="topo"><span class="em">${c.em}</span><h3>${c.t}</h3></div>
+    <div class="resumo">${c.resumo}</div>
+    <button class="bmais" onclick="this.parentElement.classList.toggle('aberto')">🔎 Ver mais</button>
+    <div class="vermais">${c.mais}</div>
+    <div class="mini">
+      <p>🧩 ${c.q}</p>
+      ${c.o.map((t,oi)=>`<button onclick="mini(this,${i},${oi})">${t}</button>`).join('')}
+      <div class="fb" id="mfb${i}"></div>
+    </div>`;
+  grid.appendChild(d);
+});
+
+const feito={};
+function mini(btn,i,esc){
+  if(feito[i]) return; feito[i]=true;
+  const c=cards[i];
+  const fb=document.getElementById('mfb'+i);
+  const bs=btn.parentElement.querySelectorAll('button');
+  if(esc===c.c){ btn.classList.add('certa'); fb.className='fb ok'; fb.textContent='✅ '+c.ok; }
+  else { btn.classList.add('errada'); bs[c.c].classList.add('certa'); fb.className='fb no'; fb.textContent='💡 '+c.no; }
+}
+</script>
+</body>
+</html>

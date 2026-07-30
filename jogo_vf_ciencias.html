@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo Verdadeiro ou Falso – Guardiões do Planeta</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e3f2fd,#e8f5e9);color:#2b2b2b;padding:14px;line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto}
+  header{background:linear-gradient(135deg,#00897b,#1565c0);color:#fff;border-radius:22px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.18);border:4px solid #ffd54f}
+  header h1{font-size:1.45rem;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+  header p{margin-top:8px;font-size:.95rem}
+  .mascote{font-size:2.4rem}
+  .placar{background:#fff;border-radius:16px;padding:12px 16px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:space-between;border:3px solid #ffd54f;font-weight:bold;color:#00695c}
+  .placar .estrelas{color:#f9a825}
+  .card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 6px 18px rgba(0,0,0,.12);text-align:center;border-top:8px solid #00897b}
+  .contador{color:#888;font-size:.85rem;margin-bottom:8px}
+  .frase{font-size:1.18rem;margin:16px 0 22px;min-height:80px;display:flex;align-items:center;justify-content:center}
+  .botoes{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .bvf{border:none;border-radius:30px;padding:14px 30px;font-size:1.1rem;font-weight:bold;cursor:pointer;color:#fff;font-family:inherit;transition:.15s}
+  .bv{background:#43a047}.bv:hover{background:#2e7d32;transform:scale(1.05)}
+  .bf{background:#e53935}.bf:hover{background:#c62828;transform:scale(1.05)}
+  .fb{margin-top:18px;padding:14px;border-radius:14px;font-size:.98rem;display:none;text-align:left}
+  .fb.ok{background:#e8f5e9;color:#2e7d32;display:block;border:2px solid #43a047}
+  .fb.no{background:#ffebee;color:#c62828;display:block;border:2px solid #e53935}
+  .prox{margin-top:16px;background:#1565c0;color:#fff;border:none;border-radius:30px;padding:12px 26px;font-size:1rem;cursor:pointer;font-family:inherit;display:none}
+  .prox:hover{background:#0d47a1}
+  .final{display:none;text-align:center}
+  .final h2{color:#00695c;font-size:1.6rem;margin-bottom:10px}
+  .final .nota{font-size:2.4rem;margin:12px 0}
+  .btn{background:#43a047;color:#fff;border:none;border-radius:30px;padding:14px 28px;font-size:1.05rem;cursor:pointer;font-family:inherit;margin-top:12px}
+  .btn:hover{background:#2e7d32}
+  footer{text-align:center;color:#888;font-size:.82rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascote">🛡️✅❌</div>
+    <h1>Verdadeiro ou Falso — Guardiões do Planeta</h1>
+    <p>O robô <b>Ciclo</b> vai testar seus poderes! A cada rodada, sorteamos <b>12 frases</b>. Diga se é Verdadeiro ou Falso e ganhe medalhas! 🏅</p>
+  </header>
+
+  <div class="placar">
+    <span>Rodada de <span id="totalR">12</span> frases</span>
+    <span class="estrelas">🏅 <span id="acertos">0</span> medalhas</span>
+  </div>
+
+  <div class="card" id="card">
+    <div class="contador">Frase <span id="atual">1</span> de <span id="totalR2">12</span></div>
+    <div class="frase" id="frase">...</div>
+    <div class="botoes">
+      <button class="bvf bv" onclick="responder(true)">✔️ Verdadeiro</button>
+      <button class="bvf bf" onclick="responder(false)">❌ Falso</button>
+    </div>
+    <div class="fb" id="fb"></div>
+    <button class="prox" id="prox" onclick="proxima()">Próxima ➡️</button>
+  </div>
+
+  <div class="card final" id="final">
+    <h2>🎉 Rodada concluída!</h2>
+    <div class="nota" id="nota"></div>
+    <p id="msgFinal"></p>
+    <button class="btn" onclick="iniciar()">🔄 Jogar de novo</button>
+  </div>
+
+  <footer>Cada rodada sorteia frases diferentes. Jogue várias vezes para virar mestre Guardião(ã)! 💚💙</footer>
+</div>
+
+<script>
+const banco = [
+  {f:'Resíduo é aquilo que descartamos e que ainda pode ser reaproveitado.', v:true, e:'Verdadeiro! Resíduo pode ser reciclado ou reutilizado. O rejeito é que não pode mais.'},
+  {f:'Rejeito é o lixo que ainda pode ser reciclado.', v:false, e:'Falso! Rejeito é justamente o que NÃO pode mais ser reaproveitado. O que pode é o resíduo.'},
+  {f:'A primeira etapa da história de um objeto é o descarte.', v:false, e:'Falso! A primeira etapa é a extração da matéria-prima. O descarte é a última.'},
+  {f:'No transporte, quanto maior a distância, mais recursos são gastos e mais resíduos são gerados.', v:true, e:'Verdadeiro! Mais distância = mais combustível queimado e mais gases soltados.'},
+  {f:'O lixão é o destino mais seguro para os resíduos.', v:false, e:'Falso! O lixão é o PIOR: fica a céu aberto, sem tratamento. O mais seguro é o aterro sanitário.'},
+  {f:'No aterro sanitário, o solo é impermeabilizado com uma manta de plástico resistente.', v:true, e:'Verdadeiro! A manta impede que o chorume contamine o solo e a água.'},
+  {f:'O chorume é um gás liberado pelas plantas durante o dia.', v:false, e:'Falso! O chorume é um líquido escuro produzido pela decomposição do lixo. Ele contamina solo e água.'},
+  {f:'O gás metano de um aterro sanitário pode ser coletado e usado para gerar energia elétrica.', v:true, e:'Verdadeiro! No aterro sanitário o metano é coletado e queimado, gerando energia em alguns lugares.'},
+  {f:'A incineração é a queima dos resíduos e é muito usada para o lixo hospitalar.', v:true, e:'Verdadeiro! A queima reduz o espaço; os fornos usam filtros para segurar os gases tóxicos.'},
+  {f:'A compostagem é feita por microrganismos e transforma resíduos orgânicos em adubo.', v:true, e:'Verdadeiro! É a "reciclagem do orgânico": cascas e restos viram composto (adubo).'},
+  {f:'A reciclagem aumenta a quantidade de lixo enviada aos aterros e lixões.', v:false, e:'Falso! A reciclagem REDUZ o lixo nos aterros, pois o material volta a ser matéria-prima.'},
+  {f:'A lata de alumínio é o objeto mais reciclado no Brasil.', v:true, e:'Verdadeiro! O Brasil recicla quase todas as latas de alumínio que produz.'},
+  {f:'Pilhas e baterias usadas podem ser jogadas na lixeira comum.', v:false, e:'Falso! Elas são resíduos perigosos (têm metais pesados) e vão para postos de coleta específicos.'},
+  {f:'Vidro, papel, papelão e metais são materiais recicláveis.', v:true, e:'Verdadeiro! Eles devem ser higienizados, secos e enviados para a coleta seletiva.'},
+  {f:'Reduzir o consumo é uma das ações dos 5 Rs.', v:true, e:'Verdadeiro! Os 5 Rs são: Repensar, Reduzir, Recusar, Reciclar e Reutilizar.'},
+  {f:'Consertar um objeto em vez de comprar um novo é um exemplo de Reutilizar.', v:true, e:'Verdadeiro! Reutilizar é dar nova vida ao objeto, evitando comprar outro.'},
+  {f:'A água e o vento são recursos naturais não renováveis.', v:false, e:'Falso! Água e vento são RENOVÁVEIS. Não renováveis são o petróleo, o carvão, os minérios...'},
+  {f:'O petróleo é um recurso renovável que nunca acaba.', v:false, e:'Falso! O petróleo é NÃO renovável: leva milhões de anos para se formar e pode se esgotar.'},
+  {f:'Petróleo, gás natural e carvão mineral são chamados de combustíveis fósseis.', v:true, e:'Verdadeiro! Eles se formaram da decomposição de restos de organismos ao longo de milhões de anos.'},
+  {f:'O efeito estufa é um fenômeno natural que ajuda a manter a temperatura da Terra.', v:true, e:'Verdadeiro! Ele é natural e importante. O problema é o EXCESSO de gases, que causa o aquecimento global.'},
+  {f:'Queimar combustíveis fósseis aumenta o efeito estufa.', v:true, e:'Verdadeiro! A queima solta gás carbônico e metano, que intensificam o efeito estufa.'},
+  {f:'O desmatamento ajuda a reduzir o gás carbônico do ar.', v:false, e:'Falso! É o contrário: sem árvores, sobra menos gente para absorver o gás carbônico na fotossíntese.'},
+  {f:'No tratamento da água, o cloro serve para eliminar os microrganismos que causam doenças.', v:true, e:'Verdadeiro! O cloro elimina microrganismos; o flúor ajuda a prevenir cáries.'},
+  {f:'A água que sai do tratamento de esgoto pode ser bebida sem problemas.', v:false, e:'Falso! Ela volta ao rio e serve para limpeza e irrigação, mas NÃO pode ser bebida.'},
+  {f:'Energia solar e energia eólica são fontes renováveis de energia.', v:true, e:'Verdadeiro! O Sol e o vento não se esgotam e poluem bem menos que os combustíveis fósseis.'},
+  {f:'Fechar a torneira ao escovar os dentes ajuda a evitar o desperdício de água.', v:true, e:'Verdadeiro! Pequenas atitudes economizam muita água ao longo do tempo.'}
+];
+
+let rodada=[], indice=0, acertos=0, respondida=false;
+
+function embaralhar(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function iniciar(){
+  rodada = embaralhar([...banco]).slice(0,12);
+  indice=0; acertos=0;
+  document.getElementById('acertos').textContent=0;
+  document.getElementById('final').style.display='none';
+  document.getElementById('card').style.display='block';
+  mostrar();
+}
+
+function mostrar(){
+  respondida=false;
+  const item=rodada[indice];
+  document.getElementById('atual').textContent=indice+1;
+  document.getElementById('frase').textContent=item.f;
+  document.getElementById('fb').className='fb';
+  document.getElementById('fb').textContent='';
+  document.getElementById('prox').style.display='none';
+  document.querySelectorAll('.bvf').forEach(b=>b.disabled=false);
+}
+
+function responder(resp){
+  if(respondida) return;
+  respondida=true;
+  const item=rodada[indice];
+  const fb=document.getElementById('fb');
+  document.querySelectorAll('.bvf').forEach(b=>b.disabled=true);
+  if(resp===item.v){
+    acertos++;
+    document.getElementById('acertos').textContent=acertos;
+    fb.className='fb ok';
+    fb.textContent='✅ '+item.e;
+  } else {
+    fb.className='fb no';
+    fb.textContent='❌ '+item.e;
+  }
+  document.getElementById('prox').style.display='inline-block';
+  document.getElementById('prox').textContent = (indice===rodada.length-1)?'Ver resultado 🏆':'Próxima ➡️';
+}
+
+function proxima(){
+  indice++;
+  if(indice>=rodada.length){ fim(); }
+  else { mostrar(); }
+}
+
+function fim(){
+  document.getElementById('card').style.display='none';
+  const fin=document.getElementById('final');
+  fin.style.display='block';
+  const pct=Math.round(acertos/rodada.length*100);
+  document.getElementById('nota').textContent=`🏅 ${acertos}/${rodada.length}  (${pct}%)`;
+  let msg;
+  if(pct===100) msg='PERFEITO! Você é um(a) Guardião(ã) do Planeta nível MÁXIMO! 🌟';
+  else if(pct>=70) msg='Muito bem! Você mandou super bem. Revise as frases que errou e vai arrasar! 💪';
+  else msg='Bom treino! Jogue de novo e leia as explicações com calma — você vai melhorar rapidinho! 🤗';
+  document.getElementById('msgFinal').textContent=msg;
+}
+
+iniciar();
+</script>
+</body>
+</html>

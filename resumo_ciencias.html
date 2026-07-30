@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo da Prova – Guardiões do Planeta</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e8f5e9,#e3f2fd);color:#2b2b2b;padding:14px;line-height:1.55}
+  .wrap{max-width:900px;margin:0 auto}
+  header{background:linear-gradient(135deg,#2e7d32,#1565c0);color:#fff;border-radius:22px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.18);border:4px solid #ffd54f}
+  header h1{font-size:1.5rem;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+  header p{margin-top:8px;font-size:.95rem}
+  .mascote{font-size:2.5rem}
+  h2.sec{color:#1565c0;margin:22px 0 10px;font-size:1.25rem;border-left:8px solid #43a047;padding-left:10px}
+  /* Fluxo das etapas */
+  .fluxo{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;justify-content:center}
+  .etapa{background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1);flex:1;min-width:120px;border-top:6px solid #1e88e5}
+  .etapa .n{background:#1e88e5;color:#fff;border-radius:50%;width:28px;height:28px;line-height:28px;display:inline-block;font-weight:bold;margin-bottom:6px}
+  .etapa b{display:block;color:#0d47a1}
+  .etapa small{color:#666;font-size:.8rem}
+  .seta{align-self:center;font-size:1.4rem;color:#43a047;font-weight:bold}
+  /* Grade de palavras */
+  .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:10px}
+  .palavra{background:#fff;border-radius:14px;padding:14px;box-shadow:0 3px 10px rgba(0,0,0,.08);border-left:8px solid #00897b}
+  .palavra b{color:#00695c;font-size:1.02rem}
+  .palavra p{margin-top:5px;font-size:.92rem;color:#444}
+  /* Dicas post-it */
+  .dicas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:10px}
+  .postit{background:#fff9c4;border-radius:6px;padding:14px 16px;box-shadow:2px 4px 10px rgba(0,0,0,.15);transform:rotate(-1.2deg);font-size:.93rem;border-top:22px solid #ffe082}
+  .postit:nth-child(even){transform:rotate(1.2deg);background:#e1f5fe;border-top-color:#81d4fa}
+  .postit b{color:#e65100}
+  .postit:nth-child(even) b{color:#0277bd}
+  /* Pegadinhas */
+  .pegadinha{background:#ffebee;border:2px dashed #e53935;border-radius:14px;padding:14px 16px;margin-top:10px}
+  .pegadinha b{color:#c62828}
+  /* Mini quiz relâmpago */
+  .relampago{background:#fff;border-radius:14px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.1);margin-top:10px}
+  .flash{border-bottom:1px solid #eee;padding:12px 0}
+  .flash:last-child{border-bottom:none}
+  .flash p{font-weight:bold;color:#333}
+  .flash .resp{display:none;margin-top:8px;background:#e8f5e9;color:#2e7d32;border-radius:10px;padding:8px 12px}
+  .flash.aberto .resp{display:block;animation:pop .3s}
+  @keyframes pop{from{transform:scale(.96);opacity:.4}to{transform:scale(1);opacity:1}}
+  .flash button{background:#00897b;color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:.85rem;cursor:pointer;font-family:inherit;margin-top:6px}
+  .cta{text-align:center;margin:26px 0}
+  .cta a{display:inline-block;background:#e53935;color:#fff;text-decoration:none;border-radius:30px;padding:16px 30px;font-size:1.1rem;font-weight:bold;box-shadow:0 6px 16px rgba(229,57,53,.4)}
+  .cta a:hover{background:#c62828}
+  footer{text-align:center;color:#888;font-size:.82rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascote">📋🌍🦸</div>
+    <h1>Resumo da Prova — Guardiões do Planeta</h1>
+    <p><b>Unidade 5 – Resíduos</b> • <b>Unidade 6 – Uso dos recursos naturais</b><br>
+    Este é o seu mapa de missão, Guardião(ã)! Leia antes da prova para relembrar tudo rapidinho. 🛡️</p>
+  </header>
+
+  <h2 class="sec">🔄 A história de um objeto (decore a ordem!)</h2>
+  <div class="fluxo">
+    <div class="etapa"><span class="n">1</span><b>Extração</b><small>tira o material da natureza</small></div>
+    <div class="seta">➜</div>
+    <div class="etapa"><span class="n">2</span><b>Fabricação</b><small>vira produto</small></div>
+    <div class="seta">➜</div>
+    <div class="etapa"><span class="n">3</span><b>Transporte</b><small>leva e distribui</small></div>
+    <div class="seta">➜</div>
+    <div class="etapa"><span class="n">4</span><b>Consumo</b><small>compra e uso</small></div>
+    <div class="seta">➜</div>
+    <div class="etapa"><span class="n">5</span><b>Descarte</b><small>deixa de ser útil</small></div>
+  </div>
+  <p style="text-align:center;color:#555;margin-top:8px;font-size:.9rem">Todas as etapas gastam recursos e geram resíduos. 💡</p>
+
+  <h2 class="sec">🎒 Palavras importantes (grade de conceitos)</h2>
+  <div class="grade">
+    <div class="palavra"><b>Consumo</b><p>Ato de comprar ou usar produtos e serviços. Acontece de forma direta e indireta.</p></div>
+    <div class="palavra"><b>Resíduo</b><p>O que descartamos e que <b>ainda pode</b> ser reaproveitado (reciclado).</p></div>
+    <div class="palavra"><b>Rejeito (lixo)</b><p>O que descartamos e que <b>não pode mais</b> ser reaproveitado.</p></div>
+    <div class="palavra"><b>Lixão</b><p>Depósito a céu aberto, sem tratamento. O pior destino: contamina solo, água e ar.</p></div>
+    <div class="palavra"><b>Aterro controlado</b><p>Resíduos compactados e cobertos com terra, mas ainda sem proteção do solo.</p></div>
+    <div class="palavra"><b>Aterro sanitário</b><p>O mais seguro: solo com manta impermeável + coleta de chorume e de metano.</p></div>
+    <div class="palavra"><b>Chorume</b><p>Líquido escuro da decomposição do lixo. Contamina o solo e a água.</p></div>
+    <div class="palavra"><b>Incineração</b><p>Queima dos resíduos em local com filtros. Muito usada no lixo hospitalar.</p></div>
+    <div class="palavra"><b>Reciclagem</b><p>Coloca o material de volta na produção (vira ciclo). Poupa recursos e gera renda a catadores.</p></div>
+    <div class="palavra"><b>Compostagem</b><p>Microrganismos degradam o orgânico e formam o composto (adubo).</p></div>
+    <div class="palavra"><b>Os 5 Rs</b><p>Repensar, Reduzir, Recusar, Reciclar e Reutilizar.</p></div>
+    <div class="palavra"><b>Recurso renovável</b><p>Não se esgota / se renova: água, vento, sol, plantas, animais.</p></div>
+    <div class="palavra"><b>Recurso não renovável</b><p>Pode acabar: petróleo, gás natural, carvão, minérios e o solo.</p></div>
+    <div class="palavra"><b>Combustíveis fósseis</b><p>Petróleo, gás natural e carvão mineral.</p></div>
+    <div class="palavra"><b>Efeito estufa</b><p>Fenômeno <b>natural</b> que mantém a temperatura da Terra. O excesso de gases causa o aquecimento global.</p></div>
+    <div class="palavra"><b>Saneamento básico</b><p>Água tratada, esgoto tratado, coleta de lixo e limpeza urbana.</p></div>
+    <div class="palavra"><b>Erosão</b><p>Perda de solo quando não há vegetação para protegê-lo da chuva.</p></div>
+  </div>
+
+  <h2 class="sec">📌 Dicas de ouro para a prova</h2>
+  <div class="dicas">
+    <div class="postit"><b>Resíduo x Rejeito:</b> resíduo AINDA serve (reciclar); rejeito NÃO serve mais.</div>
+    <div class="postit"><b>Mais seguro:</b> aterro <b>sanitário</b> (manta + chorume + metano). O pior é o lixão.</div>
+    <div class="postit"><b>Ordem das etapas:</b> Extração → Fabricação → Transporte → Consumo → Descarte.</div>
+    <div class="postit"><b>5 Rs:</b> Repensar, Reduzir, Recusar, Reciclar, Reutilizar.</div>
+    <div class="postit"><b>Renováveis:</b> água, vento, sol. <b>Não renováveis:</b> petróleo, carvão, gás, minérios.</div>
+    <div class="postit"><b>Cloro</b> elimina microrganismos; <b>flúor</b> previne cáries.</div>
+  </div>
+
+  <h2 class="sec">⚠️ Cuidado com as pegadinhas!</h2>
+  <div class="pegadinha">
+    <p>❗ <b>O efeito estufa NÃO é totalmente ruim!</b> Ele é natural e importante para manter a temperatura da Terra. O problema é o <b>EXCESSO</b> de gases (do desmatamento e da queima de combustíveis), que causa o aquecimento global.</p>
+    <p style="margin-top:8px">❗ <b>Aterro controlado ≠ aterro sanitário.</b> O controlado cobre o lixo com terra, mas <b>não protege o solo</b>. Só o sanitário tem a manta impermeável.</p>
+    <p style="margin-top:8px">❗ <b>Pilhas e remédios vencidos</b> NÃO vão no lixo comum: são resíduos <b>perigosos</b> (posto de coleta específico).</p>
+  </div>
+
+  <h2 class="sec">⚡ Quiz relâmpago (clique para ver a resposta)</h2>
+  <div class="relampago" id="relampago"></div>
+
+  <div class="cta">
+    <a href="jogo_vf_ciencias.html">🎮 Quero jogar Verdadeiro ou Falso!</a>
+  </div>
+
+  <footer>Você está pronto(a), Guardião(ã)! Confie no seu treino e arrase na prova. 💚💙</footer>
+</div>
+
+<script>
+const flashes = [
+  {p:'Qual é a diferença entre resíduo e rejeito?', r:'Resíduo ainda pode ser reaproveitado (reciclado); rejeito não pode mais.'},
+  {p:'Qual é o destino de resíduos mais seguro para o meio ambiente?', r:'O aterro sanitário (solo impermeável + coleta de chorume e metano).'},
+  {p:'O que a compostagem produz?', r:'O composto, um adubo natural feito por microrganismos a partir do orgânico.'},
+  {p:'Cite três recursos naturais renováveis.', r:'Água, vento e energia solar (também plantas e animais).'},
+  {p:'Quais são os combustíveis fósseis?', r:'Petróleo, gás natural e carvão mineral.'},
+  {p:'O efeito estufa é bom ou ruim?', r:'É natural e importante! O problema é o EXCESSO de gases, que causa o aquecimento global.'},
+  {p:'Para que serve o cloro no tratamento da água?', r:'Para eliminar os microrganismos que causam doenças.'},
+  {p:'Consertar em vez de comprar um novo é qual dos 5 Rs?', r:'Reutilizar.'}
+];
+const cont = document.getElementById('relampago');
+flashes.forEach((fl,i)=>{
+  const d=document.createElement('div');
+  d.className='flash';
+  d.innerHTML=`<p>${i+1}) ${fl.p}</p><button onclick="this.parentElement.classList.add('aberto')">👀 Ver resposta</button><div class="resp">✅ ${fl.r}</div>`;
+  cont.appendChild(d);
+});
+</script>
+</body>
+</html>

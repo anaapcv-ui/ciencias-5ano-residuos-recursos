@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado – Guardiões do Planeta (Ciências 5º ano)</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e3f2fd,#e8f5e9);color:#2b2b2b;padding:14px;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto}
+  header{background:linear-gradient(135deg,#1565c0,#00897b);color:#fff;border-radius:22px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.18);border:4px solid #ffd54f}
+  header h1{font-size:1.5rem;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+  header p{margin-top:8px;font-size:.95rem}
+  .mascote{font-size:2.5rem}
+  .placar{position:sticky;top:6px;z-index:20;background:#fff;border-radius:16px;padding:10px 14px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.12);display:flex;align-items:center;gap:12px;border:3px solid #ffd54f}
+  .barra{flex:1;height:20px;background:#eee;border-radius:12px;overflow:hidden}
+  .barra > div{height:100%;width:0;background:linear-gradient(90deg,#42a5f5,#66bb6a);transition:width .4s}
+  .cont{font-weight:bold;color:#00695c;white-space:nowrap}
+  .q{background:#fff;border-radius:16px;margin:14px 0;padding:16px 18px;box-shadow:0 4px 12px rgba(0,0,0,.08);border-left:8px solid #1e88e5}
+  .q .num{font-weight:bold;color:#1565c0;font-size:.9rem}
+  .q .enun{font-weight:bold;margin:6px 0 10px}
+  .opc{display:block;width:100%;text-align:left;background:#f7f9fb;border:2px solid #ddd;border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;transition:.15s}
+  .opc:hover{border-color:#1e88e5;transform:translateX(3px)}
+  .opc.certa{background:#c8e6c9;border-color:#43a047;font-weight:bold}
+  .opc.errada{background:#ffcdd2;border-color:#e53935}
+  .fb{margin-top:8px;padding:8px 12px;border-radius:10px;font-size:.9rem;display:none}
+  .fb.ok{background:#e8f5e9;color:#2e7d32;display:block}
+  .fb.no{background:#fff3e0;color:#e65100;display:block}
+  .resultado{background:#fff;border-radius:20px;padding:26px;text-align:center;margin:18px 0;border:4px dashed #43a047;display:none}
+  .resultado.show{display:block}
+  .resultado h2{color:#00695c;font-size:1.7rem}
+  .resultado .nota{font-size:2.6rem;margin:12px 0}
+  .btn{background:#e53935;color:#fff;border:none;border-radius:30px;padding:14px 28px;font-size:1.05rem;cursor:pointer;font-family:inherit;margin-top:10px}
+  .btn:hover{background:#c62828}
+  .aviso{background:#fff8e1;border:2px dashed #ffb300;border-radius:12px;padding:12px 14px;margin:12px 0;font-size:.9rem;text-align:center}
+  footer{text-align:center;color:#888;font-size:.82rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascote">📝🌍🛡️</div>
+    <h1>Simulado Final — Guardiões do Planeta</h1>
+    <p><b>Unidade 5 – Resíduos</b> • <b>Unidade 6 – Uso dos recursos naturais</b><br>
+    25 desafios para você treinar como um(a) verdadeiro(a) Guardião(ã)! Boa sorte! 🍀</p>
+  </header>
+
+  <div class="placar">
+    <span style="font-size:1.3rem">🏅</span>
+    <div class="barra"><div id="barra"></div></div>
+    <span class="cont"><span id="feitas">0</span>/25</span>
+  </div>
+
+  <div class="aviso">Responda com calma. Ao terminar todas, seu resultado aparece automaticamente no final. Depois, confira o <b>gabarito comentado</b> (arquivo separado). 💡</div>
+
+  <div id="questoes"></div>
+
+  <div class="resultado" id="resultado">
+    <h2>🏆 Missão concluída!</h2>
+    <div class="nota" id="nota"></div>
+    <p id="msg"></p>
+    <button class="btn" onclick="location.reload()">🔄 Refazer o simulado</button>
+  </div>
+
+  <footer>Feito com carinho para você brilhar na prova, Guardião(ã)! 💚💙</footer>
+</div>
+
+<script>
+const questoes = [
+  {e:'O que chamamos de consumo?',
+   o:['Apenas jogar o lixo fora','O ato de comprar ou usar produtos e serviços para atender às nossas necessidades','Somente reciclar materiais','Plantar árvores no quintal'],c:1},
+  {e:'Um material que descartamos, mas que ainda pode ser reaproveitado, é chamado de:',
+   o:['Rejeito','Chorume','Resíduo','Adubo'],c:2},
+  {e:'Como chamamos o lixo que não pode mais ser reaproveitado?',
+   o:['Resíduo','Rejeito','Composto','Reciclável'],c:1},
+  {e:'Qual é a ordem correta das etapas da história de um objeto?',
+   o:['Descarte → Consumo → Transporte → Fabricação → Extração','Extração → Fabricação → Transporte → Consumo → Descarte','Fabricação → Extração → Consumo → Transporte → Descarte','Consumo → Descarte → Fabricação → Transporte → Extração'],c:1},
+  {e:'Na extração, materiais como o petróleo e o ferro são exemplos de recursos:',
+   o:['Renováveis','Artificiais','Não renováveis','Recicláveis'],c:2},
+  {e:'Por que transportar um produto de um lugar muito distante gera mais poluição?',
+   o:['Porque gasta mais combustível e libera mais gases','Porque o produto fica mais bonito','Porque não usa nenhum veículo','Porque diminui os resíduos'],c:0},
+  {e:'Qual é o destino de resíduos mais seguro para o meio ambiente?',
+   o:['Lixão','Aterro controlado','Aterro sanitário','Um rio próximo'],c:2},
+  {e:'No aterro sanitário, o que impede que o chorume contamine o solo?',
+   o:['Uma manta impermeável','Uma camada de folhas secas','Um filtro de ar','Nada, ele contamina do mesmo jeito'],c:0},
+  {e:'O líquido escuro produzido pela decomposição do lixo, que pode contaminar o solo e a água, é o:',
+   o:['Composto','Chorume','Cloro','Metano'],c:1},
+  {e:'O que diferencia o aterro controlado do lixão?',
+   o:['Nada, são exatamente iguais','No aterro controlado o lixo é compactado e coberto com terra','O aterro controlado fica dentro de casa','O lixão trata o chorume'],c:1},
+  {e:'A incineração é um destino muito usado para qual tipo de resíduo?',
+   o:['Restos de comida','Resíduos hospitalares','Garrafas de vidro','Papel de caderno'],c:1},
+  {e:'O que a compostagem produz a partir dos resíduos orgânicos?',
+   o:['Plástico','Combustível fóssil','Adubo (composto)','Metal'],c:2},
+  {e:'Quem realiza o processo de compostagem?',
+   o:['Grandes máquinas','Microrganismos','O vento','A energia solar'],c:1},
+  {e:'Por que a reciclagem é importante para o meio ambiente?',
+   o:['Porque aumenta o lixo nos aterros','Porque poupa recursos naturais e reduz o lixo nos aterros','Porque gasta mais matéria-prima','Porque polui os rios'],c:1},
+  {e:'Onde devemos descartar pilhas e baterias usadas?',
+   o:['Na lixeira comum de casa','No vaso de plantas','Em postos de coleta específicos, pois são resíduos perigosos','Junto com os restos de comida'],c:2},
+  {e:'Qual destes é um material reciclável?',
+   o:['Casca de banana','Garrafa de vidro','Pilha usada','Remédio vencido'],c:1},
+  {e:'Quais são os 5 Rs do consumo consciente?',
+   o:['Repensar, Reduzir, Recusar, Reciclar e Reutilizar','Rasgar, Rodar, Repetir, Reunir e Rir','Reciclar, Rachar, Remar, Reduzir e Repor','Apenas Reduzir e Reciclar'],c:0},
+  {e:'Levar sua própria sacola de pano ao mercado é um exemplo de qual R?',
+   o:['Reduzir','Incinerar','Extrair','Poluir'],c:0},
+  {e:'Qual destes é um recurso natural renovável?',
+   o:['Petróleo','Carvão mineral','Água','Ferro'],c:2},
+  {e:'Petróleo, gás natural e carvão mineral são conhecidos como:',
+   o:['Recursos renováveis','Combustíveis fósseis','Materiais recicláveis','Fontes de energia solar'],c:1},
+  {e:'Sobre o efeito estufa, qual afirmação está correta?',
+   o:['É totalmente ruim e deveria ser eliminado','É um fenômeno natural importante; o excesso de gases causa o aquecimento global','Ele resfria o planeta','Não tem nenhuma relação com os gases'],c:1},
+  {e:'Por que o desmatamento piora o aquecimento global?',
+   o:['Porque as árvores esquentam o ar','Porque sobram menos plantas para absorver o gás carbônico','Porque o solo fica mais fértil','Porque não tem nenhuma relação'],c:1},
+  {e:'No tratamento da água, para que serve o cloro?',
+   o:['Para deixar a água azul','Para prevenir cáries','Para eliminar os microrganismos que causam doenças','Para gelar a água'],c:2},
+  {e:'O que faz parte do saneamento básico?',
+   o:['Apenas a energia elétrica','Água tratada, tratamento de esgoto, coleta de lixo e limpeza urbana','Apenas a internet','Apenas o transporte público'],c:1},
+  {e:'Qual atitude representa o uso sustentável dos recursos naturais?',
+   o:['Tomar banhos bem longos todos os dias','Usar energia solar e economizar água','Queimar mais combustíveis fósseis','Desmatar florestas para construir'],c:1}
+];
+
+let feitas=0, acertos=0;
+const jaResp={};
+const cont=document.getElementById('questoes');
+
+questoes.forEach((q,qi)=>{
+  const div=document.createElement('div');
+  div.className='q';
+  let opc=q.o.map((t,oi)=>`<button class="opc" onclick="resp(this,${qi},${oi})">${String.fromCharCode(65+oi)}) ${t}</button>`).join('');
+  div.innerHTML=`<div class="num">Questão ${qi+1} de 25</div><div class="enun">${q.e}</div>${opc}<div class="fb" id="fb${qi}"></div>`;
+  cont.appendChild(div);
+});
+
+function resp(btn,qi,escolha){
+  if(jaResp[qi]) return;
+  jaResp[qi]=true;
+  feitas++;
+  const certa=questoes[qi].c;
+  const fb=document.getElementById('fb'+qi);
+  const botoes=btn.parentElement.querySelectorAll('.opc');
+  if(escolha===certa){
+    btn.classList.add('certa');
+    fb.className='fb ok';
+    fb.textContent='✅ Correto! Mandou bem, Guardião(ã)!';
+    acertos++;
+  } else {
+    btn.classList.add('errada');
+    botoes[certa].classList.add('certa');
+    fb.className='fb no';
+    fb.textContent='💡 A resposta certa está em verde. Confira a explicação no gabarito.';
+  }
+  botoes.forEach(b=>b.style.cursor='default');
+  document.getElementById('feitas').textContent=feitas;
+  document.getElementById('barra').style.width=(feitas/25*100)+'%';
+  if(feitas===25) fim();
+}
+
+function fim(){
+  const r=document.getElementById('resultado');
+  r.classList.add('show');
+  const pct=Math.round(acertos/25*100);
+  document.getElementById('nota').textContent=`🏅 ${acertos}/25  (${pct}%)`;
+  let msg;
+  if(pct===100) msg='UAU! Nota máxima! Você é um(a) Guardião(ã) do Planeta lendário(a)! 🌟';
+  else if(pct>=70) msg='Muito bem! Você está pronto(a) para a prova. Revise no gabarito o que errou. 💪';
+  else msg='Bom trabalho! Volte à Leitura Guiada e ao Resumo, e refaça o simulado. Você vai conseguir! 🤗';
+  document.getElementById('msg').textContent=msg;
+  r.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

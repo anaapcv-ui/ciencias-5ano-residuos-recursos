@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabarito Comentado – Simulado Guardiões do Planeta</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e8f5e9,#e3f2fd);color:#2b2b2b;padding:14px;line-height:1.55}
+  .wrap{max-width:820px;margin:0 auto}
+  header{background:linear-gradient(135deg,#00897b,#2e7d32);color:#fff;border-radius:22px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.18);border:4px solid #ffd54f}
+  header h1{font-size:1.45rem;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+  header p{margin-top:8px;font-size:.93rem}
+  .mascote{font-size:2.4rem}
+  .tabela{background:#fff;border-radius:14px;padding:14px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .tabela h3{color:#00695c;margin-bottom:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{background:#e8f5e9;border:2px solid #43a047;border-radius:10px;padding:5px 9px;font-size:.82rem;font-weight:bold;color:#2e7d32}
+  .q{background:#fff;border-radius:16px;margin:12px 0;padding:16px 18px;box-shadow:0 4px 12px rgba(0,0,0,.08);border-left:8px solid #43a047}
+  .q .num{font-weight:bold;color:#00695c}
+  .q .enun{font-weight:bold;margin:6px 0 8px}
+  .op{padding:7px 12px;border-radius:9px;margin:5px 0;font-size:.92rem}
+  .op.certa{background:#c8e6c9;border:2px solid #43a047;font-weight:bold;color:#1b5e20}
+  .op.errada{background:#f1f3f4;border:1px solid #ddd;color:#666}
+  .coment{background:#fff8e1;border-left:5px solid #ffb300;border-radius:8px;padding:9px 12px;margin-top:8px;font-size:.9rem}
+  .coment b{color:#e65100}
+  footer{text-align:center;color:#888;font-size:.82rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascote">✅📋🦸</div>
+    <h1>Gabarito Comentado — Simulado</h1>
+    <p>Guardiões do Planeta • Ciências 5º ano<br>A resposta certa está em <b>verde</b>. Leia o comentário para entender cada uma! 💡</p>
+  </header>
+
+  <div class="tabela">
+    <h3>🏅 Respostas rápidas</h3>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div id="lista"></div>
+
+  <footer>Confira suas respostas com carinho. Cada erro é uma chance de aprender! 💚💙</footer>
+</div>
+
+<script>
+const gab = [
+  {e:'O que chamamos de consumo?',
+   o:['Apenas jogar o lixo fora','O ato de comprar ou usar produtos e serviços para atender às nossas necessidades','Somente reciclar materiais','Plantar árvores no quintal'],c:1,
+   com:'Consumo é comprar ou usar produtos e serviços para atender às necessidades. Acontece de forma direta e indireta, o tempo todo.'},
+  {e:'Um material que descartamos, mas que ainda pode ser reaproveitado, é chamado de:',
+   o:['Rejeito','Chorume','Resíduo','Adubo'],c:2,
+   com:'Resíduo é o que descartamos e AINDA pode ser reaproveitado. O rejeito é o que não pode mais; o chorume é líquido do lixo; adubo vem da compostagem.'},
+  {e:'Como chamamos o lixo que não pode mais ser reaproveitado?',
+   o:['Resíduo','Rejeito','Composto','Reciclável'],c:1,
+   com:'Rejeito é o "lixo" que não pode mais ser reaproveitado. O resíduo, ao contrário, ainda pode.'},
+  {e:'Qual é a ordem correta das etapas da história de um objeto?',
+   o:['Descarte → Consumo → Transporte → Fabricação → Extração','Extração → Fabricação → Transporte → Consumo → Descarte','Fabricação → Extração → Consumo → Transporte → Descarte','Consumo → Descarte → Fabricação → Transporte → Extração'],c:1,
+   com:'A ordem certa é: Extração → Fabricação → Transporte → Consumo → Descarte. Todas as etapas gastam recursos e geram resíduos.'},
+  {e:'Na extração, materiais como o petróleo e o ferro são exemplos de recursos:',
+   o:['Renováveis','Artificiais','Não renováveis','Recicláveis'],c:2,
+   com:'Petróleo e ferro são não renováveis: a natureza leva milhões de anos para formá-los e eles podem se esgotar.'},
+  {e:'Por que transportar um produto de um lugar muito distante gera mais poluição?',
+   o:['Porque gasta mais combustível e libera mais gases','Porque o produto fica mais bonito','Porque não usa nenhum veículo','Porque diminui os resíduos'],c:0,
+   com:'Quanto maior a distância, mais combustível é queimado e mais gases são liberados. Distância grande = mais poluição.'},
+  {e:'Qual é o destino de resíduos mais seguro para o meio ambiente?',
+   o:['Lixão','Aterro controlado','Aterro sanitário','Um rio próximo'],c:2,
+   com:'O aterro sanitário é o mais seguro: solo impermeabilizado com manta, coleta e tratamento do chorume e coleta do gás metano.'},
+  {e:'No aterro sanitário, o que impede que o chorume contamine o solo?',
+   o:['Uma manta impermeável','Uma camada de folhas secas','Um filtro de ar','Nada, ele contamina do mesmo jeito'],c:0,
+   com:'O solo é impermeabilizado com uma manta de plástico bem resistente, que impede o chorume de atingir o solo e a água.'},
+  {e:'O líquido escuro produzido pela decomposição do lixo, que pode contaminar o solo e a água, é o:',
+   o:['Composto','Chorume','Cloro','Metano'],c:1,
+   com:'Chorume é o líquido da decomposição do lixo. O metano é um gás; o cloro trata a água; o composto é adubo.'},
+  {e:'O que diferencia o aterro controlado do lixão?',
+   o:['Nada, são exatamente iguais','No aterro controlado o lixo é compactado e coberto com terra','O aterro controlado fica dentro de casa','O lixão trata o chorume'],c:1,
+   com:'No aterro controlado o lixo é compactado e coberto com terra. Mas ele ainda não protege o solo (só o aterro sanitário protege).'},
+  {e:'A incineração é um destino muito usado para qual tipo de resíduo?',
+   o:['Restos de comida','Resíduos hospitalares','Garrafas de vidro','Papel de caderno'],c:1,
+   com:'A incineração (queima com filtros) é muito usada para o lixo hospitalar, considerado perigoso.'},
+  {e:'O que a compostagem produz a partir dos resíduos orgânicos?',
+   o:['Plástico','Combustível fóssil','Adubo (composto)','Metal'],c:2,
+   com:'A compostagem transforma cascas e restos de alimentos em composto, um adubo natural para hortas e jardins.'},
+  {e:'Quem realiza o processo de compostagem?',
+   o:['Grandes máquinas','Microrganismos','O vento','A energia solar'],c:1,
+   com:'A compostagem é um processo natural feito por microrganismos, que degradam o material orgânico.'},
+  {e:'Por que a reciclagem é importante para o meio ambiente?',
+   o:['Porque aumenta o lixo nos aterros','Porque poupa recursos naturais e reduz o lixo nos aterros','Porque gasta mais matéria-prima','Porque polui os rios'],c:1,
+   com:'A reciclagem devolve o material à produção: poupa recursos, reduz o lixo em aterros e ainda gera renda para catadores.'},
+  {e:'Onde devemos descartar pilhas e baterias usadas?',
+   o:['Na lixeira comum de casa','No vaso de plantas','Em postos de coleta específicos, pois são resíduos perigosos','Junto com os restos de comida'],c:2,
+   com:'Pilhas e baterias têm metais pesados: são resíduos perigosos e devem ir para postos de coleta específicos.'},
+  {e:'Qual destes é um material reciclável?',
+   o:['Casca de banana','Garrafa de vidro','Pilha usada','Remédio vencido'],c:1,
+   com:'A garrafa de vidro é reciclável. Casca de banana é orgânico; pilha e remédio vencido são perigosos.'},
+  {e:'Quais são os 5 Rs do consumo consciente?',
+   o:['Repensar, Reduzir, Recusar, Reciclar e Reutilizar','Rasgar, Rodar, Repetir, Reunir e Rir','Reciclar, Rachar, Remar, Reduzir e Repor','Apenas Reduzir e Reciclar'],c:0,
+   com:'Os 5 Rs são: Repensar, Reduzir, Recusar, Reciclar e Reutilizar.'},
+  {e:'Levar sua própria sacola de pano ao mercado é um exemplo de qual R?',
+   o:['Reduzir','Incinerar','Extrair','Poluir'],c:0,
+   com:'Usar sacola retornável de pano evita sacolas descartáveis: é uma forma de Reduzir o consumo.'},
+  {e:'Qual destes é um recurso natural renovável?',
+   o:['Petróleo','Carvão mineral','Água','Ferro'],c:2,
+   com:'A água é renovável (faz parte de um ciclo). Petróleo, carvão e ferro são não renováveis.'},
+  {e:'Petróleo, gás natural e carvão mineral são conhecidos como:',
+   o:['Recursos renováveis','Combustíveis fósseis','Materiais recicláveis','Fontes de energia solar'],c:1,
+   com:'Eles são os combustíveis fósseis, formados da decomposição de organismos ao longo de milhões de anos.'},
+  {e:'Sobre o efeito estufa, qual afirmação está correta?',
+   o:['É totalmente ruim e deveria ser eliminado','É um fenômeno natural importante; o excesso de gases causa o aquecimento global','Ele resfria o planeta','Não tem nenhuma relação com os gases'],c:1,
+   com:'Cuidado com a pegadinha! O efeito estufa é natural e importante (mantém a temperatura). O problema é o EXCESSO de gases, que causa o aquecimento global.'},
+  {e:'Por que o desmatamento piora o aquecimento global?',
+   o:['Porque as árvores esquentam o ar','Porque sobram menos plantas para absorver o gás carbônico','Porque o solo fica mais fértil','Porque não tem nenhuma relação'],c:1,
+   com:'As plantas absorvem gás carbônico na fotossíntese. Com menos árvores, esse gás se acumula mais rápido na atmosfera.'},
+  {e:'No tratamento da água, para que serve o cloro?',
+   o:['Para deixar a água azul','Para prevenir cáries','Para eliminar os microrganismos que causam doenças','Para gelar a água'],c:2,
+   com:'O cloro elimina os microrganismos que causam doenças. Quem previne cáries é o flúor.'},
+  {e:'O que faz parte do saneamento básico?',
+   o:['Apenas a energia elétrica','Água tratada, tratamento de esgoto, coleta de lixo e limpeza urbana','Apenas a internet','Apenas o transporte público'],c:1,
+   com:'Saneamento básico inclui água tratada, coleta e tratamento do esgoto, coleta de resíduos e limpeza urbana.'},
+  {e:'Qual atitude representa o uso sustentável dos recursos naturais?',
+   o:['Tomar banhos bem longos todos os dias','Usar energia solar e economizar água','Queimar mais combustíveis fósseis','Desmatar florestas para construir'],c:1,
+   com:'Usar energias renováveis (solar) e economizar água é agir de forma sustentável, pensando nas futuras gerações.'}
+];
+
+const letras=['A','B','C','D'];
+const chips=document.getElementById('chips');
+gab.forEach((q,i)=>{ const c=document.createElement('span'); c.className='chip'; c.textContent=(i+1)+'. '+letras[q.c]; chips.appendChild(c); });
+
+const lista=document.getElementById('lista');
+gab.forEach((q,i)=>{
+  const div=document.createElement('div');
+  div.className='q';
+  let ops=q.o.map((t,oi)=>`<div class="op ${oi===q.c?'certa':'errada'}">${letras[oi]}) ${t} ${oi===q.c?'✅':''}</div>`).join('');
+  div.innerHTML=`<div class="num">Questão ${i+1} — Resposta correta: ${letras[q.c]}</div><div class="enun">${q.e}</div>${ops}<div class="coment"><b>Por quê?</b> ${q.com}</div>`;
+  lista.appendChild(div);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada – Guardiões do Planeta (Ciências 5º ano)</title>
+<style>
+  :root{
+    --c1:#2e7d32; --c2:#1565c0; --c3:#00897b; --c4:#ef6c00; --c5:#6d4c41;
+    --c6:#43a047; --c7:#1e88e5; --c8:#c62828; --c9:#0277bd; --c10:#558b2f; --rev:#f9a825;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Comic Sans MS','Trebuchet MS',sans-serif}
+  body{background:linear-gradient(135deg,#e8f5e9,#e3f2fd);color:#2b2b2b;padding:14px;line-height:1.55}
+  .wrap{max-width:900px;margin:0 auto}
+  header{background:linear-gradient(135deg,#1565c0,#2e7d32);color:#fff;border-radius:22px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.18);border:4px solid #ffd54f}
+  header h1{font-size:1.6rem;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+  header p{margin-top:8px;font-size:.98rem}
+  .mascote{font-size:2.6rem}
+  .nav{background:#fff;border-radius:14px;padding:8px;margin:12px 0;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+  .nav a{text-decoration:none;color:#1565c0;background:#e3f2fd;border-radius:20px;padding:6px 12px;font-size:.82rem;font-weight:bold}
+  .nav a:hover{background:#1565c0;color:#fff}
+  .placar{position:sticky;top:8px;z-index:20;background:#fff;border-radius:16px;padding:10px 14px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.12);display:flex;align-items:center;gap:12px;border:3px solid #ffd54f}
+  .barra{flex:1;height:20px;background:#eee;border-radius:12px;overflow:hidden}
+  .barra > div{height:100%;width:0;background:linear-gradient(90deg,#66bb6a,#42a5f5);transition:width .5s}
+  .estrelas{font-weight:bold;color:#f9a825;white-space:nowrap;font-size:1.05rem}
+  .bloco{background:#fff;border-radius:18px;margin:14px 0;box-shadow:0 4px 14px rgba(0,0,0,.1);overflow:hidden;border-left:12px solid var(--cor)}
+  .cab{padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;user-select:none}
+  .cab:hover{background:#fafafa}
+  .cab .emoji{font-size:2rem}
+  .cab h2{font-size:1.12rem;color:var(--cor);flex:1}
+  .cab .seta{font-size:1.3rem;transition:transform .3s;color:#bbb}
+  .bloco.aberto .seta{transform:rotate(90deg)}
+  .corpo{display:none;padding:0 18px 18px}
+  .bloco.aberto .corpo{display:block;animation:abre .4s}
+  @keyframes abre{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .corpo p{margin:10px 0}
+  .conceitos{background:#fff8e1;border:2px dashed #ffb300;border-radius:14px;padding:12px 16px;margin:14px 0}
+  .conceitos h3{color:#ef6c00;margin-bottom:6px;font-size:1rem}
+  .conceitos b{color:#bf360c}
+  .missao{background:#e8f5e9;border-left:6px solid #43a047;border-radius:10px;padding:10px 14px;margin:12px 0;font-size:.95rem}
+  .quiz{background:#f4f6f8;border-radius:14px;padding:14px;margin-top:14px}
+  .quiz h4{color:var(--cor);margin-bottom:10px}
+  .pergunta{margin-bottom:16px}
+  .pergunta>p{font-weight:bold;margin-bottom:8px}
+  .opc{display:block;width:100%;text-align:left;background:#fff;border:2px solid #ddd;border-radius:10px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;transition:.15s}
+  .opc:hover{border-color:var(--cor);transform:translateX(3px)}
+  .opc.certa{background:#c8e6c9;border-color:#43a047;font-weight:bold}
+  .opc.errada{background:#ffcdd2;border-color:#e53935}
+  .fb{margin-top:6px;padding:8px 12px;border-radius:10px;font-size:.9rem;display:none}
+  .fb.ok{background:#e8f5e9;color:#2e7d32;display:block;animation:pop .3s}
+  .fb.no{background:#fff3e0;color:#e65100;display:block;animation:pop .3s}
+  @keyframes pop{from{transform:scale(.9)}to{transform:scale(1)}}
+  .fim{background:#fff;border-radius:18px;padding:24px;text-align:center;margin:16px 0;border:4px dashed #43a047;display:none}
+  .fim.show{display:block}
+  .fim h2{color:#2e7d32}
+  .btn{display:inline-block;background:#1565c0;color:#fff;border:none;border-radius:30px;padding:12px 22px;font-size:1rem;cursor:pointer;margin-top:10px;font-family:inherit}
+  .btn:hover{background:#0d47a1}
+  footer{text-align:center;color:#888;font-size:.82rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mascote">🦸🌍♻️</div>
+    <h1>Leitura Guiada — Guardiões do Planeta</h1>
+    <p><b>Unidade 5 – Resíduos</b> &nbsp;•&nbsp; <b>Unidade 6 – Uso dos recursos naturais</b><br>
+    Bem-vindo(a), jovem Guardião(ã)! 🛡️ A <b>Capitã Verde</b> e o robô <b>Ciclo</b> vão te treinar, missão por missão, para você salvar a Terra na prova. Clique em cada missão para abrir!</p>
+  </header>
+
+  <div class="placar">
+    <span style="font-size:1.4rem">🏅</span>
+    <div class="barra"><div id="barra"></div></div>
+    <span class="estrelas"><span id="ganhas">0</span>/<span id="total">0</span> medalhas</span>
+  </div>
+
+  <div id="blocos"></div>
+
+  <div class="fim" id="fim">
+    <h2>🎉 Missão cumprida, Guardião(ã)!</h2>
+    <p id="fimMsg"></p>
+    <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">Voltar ao topo ⬆️</button>
+  </div>
+
+  <footer>Feito com muito carinho para você arrasar na prova. Vai lá, Guardião(ã) do Planeta! 💚💙</footer>
+</div>
+
+<script>
+/* ===== CONTEÚDO ===== */
+const blocos = [
+{
+  cor:'--c1', emoji:'🛒', titulo:'Missão 1 — Consumo, resíduos e rejeitos',
+  texto:`<b>Consumir</b> é o ato de comprar ou usar produtos e serviços para atender às nossas necessidades. Consumimos o tempo todo, às vezes sem perceber! Por exemplo, num banho simples usamos <b>água</b>, <b>energia elétrica</b> e <b>sabonete</b> — e ainda gastamos energia e materiais para fabricar o sabonete e a toalha. Por isso dizemos que o consumo é <b>direto e indireto</b>.
+  <br><br>Quando descartamos algo, sobram dois tipos de material:
+  <br>• <b>Rejeito</b> (o "lixo" de verdade): o que jogamos fora e que <b>NÃO pode mais ser reaproveitado</b>.
+  <br>• <b>Resíduo</b>: o que descartamos, mas que <b>AINDA pode ser reaproveitado</b> (reciclado ou reutilizado).
+  <br><br>Atenção, Guardião(ã): não geramos resíduos só na lixeira de casa! Eles são produzidos em <b>toda a cadeia produtiva</b> — desde tirar o material da natureza até o produto chegar à sua mão.`,
+  conceitos:`<b>Consumo:</b> comprar/usar para atender necessidades (direto e indireto). • <b>Resíduo:</b> pode ser reaproveitado. • <b>Rejeito (lixo):</b> NÃO pode ser reaproveitado. • Resíduos são gerados em toda a cadeia produtiva.`,
+  quiz:[
+    {q:'Qual é a diferença entre RESÍDUO e REJEITO?',
+     o:['São a mesma coisa','Resíduo ainda pode ser reaproveitado; rejeito não pode mais','Rejeito pode ser reaproveitado; resíduo não','Resíduo é só o lixo do banheiro'],c:1,
+     ok:'Isso! Resíduo dá para reaproveitar (reciclar). Rejeito é o que não dá mais.',
+     no:'Lembre: resíduo PODE ser reaproveitado; rejeito (lixo) NÃO pode mais.'},
+    {q:'Tomar banho é um exemplo de consumo porque...',
+     o:['Não gastamos nada','Usamos água, energia e sabonete (consumo direto e indireto)','Só usamos água','Banho não é consumo'],c:1,
+     ok:'Exato! Consumimos vários recursos, mesmo numa tarefa simples do dia a dia.',
+     no:'No banho consumimos água, energia e sabonete — consumo direto e indireto.'},
+    {q:'Em que momento são gerados resíduos de um produto?',
+     o:['Só quando jogamos na lixeira','Em toda a cadeia produtiva, do início ao fim','Só na fábrica','Nunca'],c:1,
+     ok:'Certo! Da retirada da natureza ao descarte, todas as etapas geram resíduos.',
+     no:'Resíduos são gerados em TODA a cadeia produtiva, não só na lixeira de casa.'}
+  ]
+},
+{
+  cor:'--c2', emoji:'🔄', titulo:'Missão 2 — A história de um objeto (as 5 etapas)',
+  texto:`Todo objeto tem uma <b>história</b>! Ela é formada por 5 etapas comuns, sempre nesta ordem:
+  <br><br><b>1) Extração da matéria-prima</b> — tira-se o material da natureza (renovável, como a madeira, ou não renovável, como o petróleo e o ferro).
+  <br><b>2) Fabricação</b> — a matéria-prima é processada e vira produto (ex.: petróleo → plástico → caneta).
+  <br><b>3) Transporte</b> — o produto é levado e distribuído. Gasta combustível e solta gases. <b>Quanto maior a distância, mais recursos gastos e mais resíduos gerados.</b>
+  <br><b>4) Consumo</b> — a compra e o uso do produto (também geram resíduos: embalagem, sacola...).
+  <br><b>5) Descarte</b> — quando o produto deixa de ser útil. Alguns materiais, como o plástico, demoram <b>centenas de anos</b> para se decompor.
+  <br><br>Todas as etapas consomem energia e recursos e geram resíduos. Como o fluxo segue em um <b>único sentido</b>, ele pode <b>esgotar os recursos</b> e <b>acumular lixo</b> na natureza.`,
+  conceitos:`<b>Ordem das etapas:</b> Extração → Fabricação → Transporte → Consumo → Descarte. • Todas gastam recursos e geram resíduos. • Distância maior no transporte = mais poluição.`,
+  quiz:[
+    {q:'Qual é a PRIMEIRA etapa da história de um objeto?',
+     o:['Descarte','Extração da matéria-prima','Consumo','Transporte'],c:1,
+     ok:'Boa! Tudo começa tirando a matéria-prima da natureza.',
+     no:'A primeira etapa é a extração da matéria-prima (retirada da natureza).'},
+    {q:'Logo depois da FABRICAÇÃO, qual etapa acontece?',
+     o:['Extração','Transporte','Descarte','Compostagem'],c:1,
+     ok:'Certo! Depois de fabricado, o produto é transportado e distribuído.',
+     no:'A ordem é: Extração → Fabricação → TRANSPORTE → Consumo → Descarte.'},
+    {q:'Por que trazer um produto de MUITO LONGE polui mais?',
+     o:['Porque fica mais caro só','Porque gasta mais combustível e gera mais gases','Porque o produto estraga','Porque não polui'],c:1,
+     ok:'Isso! Mais distância no transporte = mais recursos gastos e mais resíduos.',
+     no:'Quanto maior a distância, mais combustível é queimado e mais gases são gerados.'}
+  ]
+},
+{
+  cor:'--c3', emoji:'🚮', titulo:'Missão 3 — Destinos dos resíduos: lixão, aterros e incineração',
+  texto:`Depois de descartados, os resíduos vão para diferentes <b>destinos</b>. Alguns são péssimos, outros são mais seguros:
+  <br><br>• <b>Lixão</b>: resíduos jogados a <b>céu aberto</b>, <b>sem nenhum tratamento</b> e sem proteção. O <b>chorume</b> (líquido escuro da decomposição do lixo) contamina o solo e o <b>lençol freático</b> (água que fica debaixo da terra). Solta gases como o <b>metano</b> (piora o efeito estufa) e atrai ratos e baratas. É o pior destino!
+  <br>• <b>Aterro controlado</b>: os resíduos são <b>compactados e cobertos com terra</b>. É melhor que o lixão, mas <b>ainda não tem proteção no solo</b>, então também contamina.
+  <br>• <b>Aterro sanitário</b>: o mais seguro! O solo é <b>impermeabilizado com uma manta de plástico</b>; o <b>chorume é coletado e tratado</b>; o <b>gás metano é coletado</b> e queimado, chegando a gerar energia elétrica.
+  <br>• <b>Incineração</b>: os resíduos são <b>queimados</b> em local apropriado, o que reduz o espaço. Como a queima solta gases tóxicos, os fornos precisam de <b>filtros</b>. É muito usada para o <b>lixo hospitalar</b>.`,
+  conceitos:`<b>Lixão:</b> céu aberto, sem tratamento (pior). • <b>Aterro controlado:</b> compactado e coberto, mas sem proteção do solo. • <b>Aterro sanitário:</b> solo impermeável + coleta de chorume e metano (melhor). • <b>Incineração:</b> queima com filtros (lixo hospitalar). • <b>Chorume:</b> líquido da decomposição. • <b>Lençol freático:</b> água subterrânea.`,
+  quiz:[
+    {q:'Qual destino de resíduos é o MAIS SEGURO para o meio ambiente?',
+     o:['Lixão','Aterro controlado','Aterro sanitário','Jogar no rio'],c:2,
+     ok:'Certinho! O aterro sanitário tem manta impermeável e coleta o chorume e o metano.',
+     no:'É o aterro sanitário: solo impermeabilizado e coleta do chorume e do gás metano.'},
+    {q:'O que é o CHORUME?',
+     o:['Um tipo de plástico','O líquido escuro produzido pela decomposição do lixo','Um gás do efeito estufa','Um adubo para plantas'],c:1,
+     ok:'Isso! O chorume é o líquido da decomposição e pode contaminar o solo e a água.',
+     no:'Chorume é o líquido produzido pela decomposição do lixo — contamina solo e água.'},
+    {q:'Qual é a diferença do ATERRO CONTROLADO para o lixão?',
+     o:['Não tem diferença','No aterro controlado os resíduos são compactados e cobertos com terra','O aterro controlado fica dentro de casa','O aterro controlado não recebe lixo'],c:1,
+     ok:'Boa! Ele compacta e cobre o lixo com terra — mas ainda não protege o solo.',
+     no:'No aterro controlado o lixo é compactado e coberto com terra (o lixão fica exposto).'}
+  ]
+},
+{
+  cor:'--c6', emoji:'♻️', titulo:'Missão 4 — Reciclagem e compostagem',
+  texto:`<b>Reciclagem</b> é recolocar materiais descartados de volta na cadeia produtiva. Assim, o material vira <b>matéria-prima</b> para novos produtos! Isso:
+  <br>• <b>reduz</b> o lixo que vai para aterros e lixões;
+  <br>• <b>poupa recursos</b> da natureza e energia;
+  <br>• tem um <b>papel social</b>, porque gera emprego e renda para as <b>cooperativas de catadores</b>.
+  <br>A reciclagem transforma o sistema de produção em um <b>ciclo</b> (o produto usado volta a ser fabricado). No Brasil, a <b>lata de alumínio</b> é o objeto mais reciclado.
+  <br><br><b>Compostagem</b> é a "reciclagem do orgânico"! É um processo <b>natural</b>, feito por <b>microrganismos</b>, que degrada resíduos orgânicos (cascas de frutas, restos de verduras...). O resultado é o <b>composto</b>, um <b>adubo natural</b> ótimo para hortas e jardins.`,
+  conceitos:`<b>Reciclagem:</b> resíduo vira matéria-prima de novo (sistema cíclico); poupa recursos; gera renda a catadores. • <b>Compostagem:</b> microrganismos degradam o orgânico e formam <b>composto/adubo</b>. • Lata de alumínio = mais reciclada no Brasil.`,
+  quiz:[
+    {q:'O que a reciclagem faz com o sistema de produção?',
+     o:['Deixa ele em linha reta','Transforma em um ciclo, pois o material volta a ser fabricado','Acaba com as fábricas','Aumenta o lixo'],c:1,
+     ok:'Isso! O produto usado é reciclado e volta para a fabricação — vira um ciclo.',
+     no:'A reciclagem torna o sistema CÍCLICO: o material volta para a etapa de fabricação.'},
+    {q:'Quem faz o trabalho da COMPOSTAGEM e o que ela produz?',
+     o:['Máquinas; produzem plástico','Microrganismos; produzem adubo (composto)','O Sol; produz energia','Ninguém; não produz nada'],c:1,
+     ok:'Boa! Microrganismos degradam o orgânico e formam o composto, um adubo natural.',
+     no:'A compostagem é feita por microrganismos e gera o composto, um adubo natural.'},
+    {q:'Além de ajudar o meio ambiente, a reciclagem também...',
+     o:['Gera emprego e renda para catadores','Aumenta a poluição do ar','Esgota os recursos','Enche os lixões'],c:0,
+     ok:'Certo! Ela tem um papel social importante para as cooperativas de catadores.',
+     no:'A reciclagem tem papel social: gera emprego e renda para as cooperativas de catadores.'}
+  ]
+},
+{
+  cor:'--c4', emoji:'🗂️', titulo:'Missão 5 — Tipos de resíduos e coleta seletiva',
+  texto:`Na <b>coleta seletiva</b>, separamos os resíduos por tipo para facilitar a destinação correta. Os principais grupos são:
+  <br><br>• <b>Orgânicos</b>: restos de alimentos, folhas de jardim. O ideal é <b>compostar</b>; se não der, vão para o aterro sanitário em sacola biodegradável.
+  <br>• <b>Recicláveis</b>: <b>plástico, vidro, papel, papelão e metais</b>. Devem ser higienizados, secos e enviados à coleta seletiva.
+  <br>• <b>Não recicláveis e não perigosos</b>: etiquetas, fitas adesivas, espelhos, papel-carbono. Vão para o aterro sanitário.
+  <br>• <b>Perigosos</b>: <b>pilhas, baterias e medicamentos vencidos</b>. Contêm metais pesados e substâncias tóxicas, por isso precisam de <b>postos de coleta específicos</b> — nunca no lixo comum!`,
+  conceitos:`<b>Orgânicos:</b> restos de comida → compostagem. • <b>Recicláveis:</b> plástico, vidro, papel, papelão, metais. • <b>Não recicláveis/não perigosos:</b> etiquetas, espelhos, fita adesiva. • <b>Perigosos:</b> pilhas, baterias, remédios → posto de coleta específico.`,
+  quiz:[
+    {q:'Onde devemos descartar PILHAS e BATERIAS usadas?',
+     o:['Na lixeira comum','Em postos de coleta específicos, pois são resíduos perigosos','No vaso de plantas','Junto com o papel'],c:1,
+     ok:'Exato! Elas têm metais pesados e são resíduos perigosos: vão para posto específico.',
+     no:'Pilhas e baterias são perigosas (metais pesados) — vão para postos de coleta específicos.'},
+    {q:'Qual destes é um resíduo RECICLÁVEL?',
+     o:['Casca de banana','Garrafa de vidro','Pilha usada','Espelho quebrado'],c:1,
+     ok:'Boa! Vidro, plástico, papel, papelão e metais são recicláveis.',
+     no:'A garrafa de vidro é reciclável. (Casca = orgânico; pilha = perigoso; espelho = não reciclável.)'},
+    {q:'O que é melhor fazer com restos de alimentos (orgânicos)?',
+     o:['Compostagem','Jogar no rio','Queimar em casa','Guardar para sempre'],c:0,
+     ok:'Isso! O ideal para o orgânico é a compostagem, que vira adubo.',
+     no:'Os orgânicos devem, de preferência, ir para a compostagem (viram adubo).'}
+  ]
+},
+{
+  cor:'--c10', emoji:'✋', titulo:'Missão 6 — Os 5 Rs do consumo consciente',
+  texto:`O consumo consciente pode ser resumido em <b>5 ações que começam com R</b>: <b>Repensar, Reduzir, Recusar, Reciclar e Reutilizar</b>.
+  <br><br>• <b>Repensar</b>: refletir antes de comprar — "eu realmente preciso disso?"; preferir produtores locais.
+  <br>• <b>Reduzir</b>: consumir menos — escolher produtos duráveis, usar sacola retornável, comprar a granel.
+  <br>• <b>Recusar</b>: dizer não ao que faz mal ao ambiente — evitar descartáveis e excesso de embalagem.
+  <br>• <b>Reciclar</b>: separar os resíduos em casa e fazer compostagem.
+  <br>• <b>Reutilizar</b>: dar nova vida às coisas — consertar em vez de jogar fora, doar e trocar roupas e brinquedos.`,
+  conceitos:`<b>5 Rs:</b> Repensar (será que preciso?), Reduzir (consumir menos), Recusar (dizer não ao descartável), Reciclar (separar/compostar), Reutilizar (consertar, doar, trocar).`,
+  quiz:[
+    {q:'Levar sua própria sacola de pano ao mercado é um exemplo de qual R?',
+     o:['Reduzir','Incinerar','Extrair','Poluir'],c:0,
+     ok:'Boa! Usar sacola retornável ajuda a REDUZIR o consumo de descartáveis.',
+     no:'Usar sacola de pano é REDUZIR (evita sacolas plásticas descartáveis).'},
+    {q:'Consertar um brinquedo quebrado em vez de comprar um novo é...',
+     o:['Reutilizar','Descartar','Extrair matéria-prima','Recusar'],c:0,
+     ok:'Certo! Consertar e usar de novo é REUTILIZAR.',
+     no:'Consertar em vez de comprar novo é REUTILIZAR (dar nova vida ao objeto).'},
+    {q:'Parar e pensar "eu realmente preciso comprar isso?" é qual R?',
+     o:['Reciclar','Repensar','Reduzir','Reutilizar'],c:1,
+     ok:'Isso! Refletir antes de comprar é REPENSAR os nossos hábitos.',
+     no:'Refletir se o item é mesmo necessário é REPENSAR.'}
+  ]
+},
+{
+  cor:'--c7', emoji:'🌱', titulo:'Missão 7 — Recursos naturais: renováveis e não renováveis',
+  texto:`<b>Recursos naturais</b> são elementos da natureza que o ser humano usa para atender às suas necessidades. Eles se dividem em dois grupos:
+  <br><br>• <b>Renováveis</b>: <b>não se esgotam</b> ou se renovam pela natureza. Exemplos: <b>plantas, animais, água, vento</b> (energia eólica) e <b>energia solar</b>. Cuidado: alguns, como a água, podem <b>ficar escassos</b> se forem mal usados!
+  <br>• <b>Não renováveis</b>: <b>podem se esgotar</b> porque a natureza leva <b>milhões de anos</b> para formá-los. Exemplos: <b>petróleo, gás natural, carvão mineral</b>, os <b>minérios</b> (ferro, bauxita, ouro, cobre...) e o próprio <b>solo</b>.
+  <br><br>O petróleo, o gás natural e o carvão mineral são chamados de <b>combustíveis fósseis</b>, porque se formaram da decomposição de restos de organismos que viveram há milhões de anos.`,
+  conceitos:`<b>Renováveis:</b> não se esgotam / se renovam (água, vento, sol, plantas, animais). • <b>Não renováveis:</b> podem acabar; demoram milhões de anos (petróleo, gás natural, carvão, minérios, solo). • <b>Combustíveis fósseis:</b> petróleo + gás natural + carvão mineral.`,
+  quiz:[
+    {q:'Qual grupo de recursos naturais a ÁGUA, o VENTO e o SOL pertencem?',
+     o:['Não renováveis','Renováveis','Combustíveis fósseis','Minérios'],c:1,
+     ok:'Certo! Água, vento e sol são recursos renováveis.',
+     no:'Água, vento e sol são RENOVÁVEIS (não se esgotam / se renovam).'},
+    {q:'Quais são os três COMBUSTÍVEIS FÓSSEIS?',
+     o:['Água, vento e sol','Petróleo, gás natural e carvão mineral','Madeira, couro e lã','Ferro, ouro e prata'],c:1,
+     ok:'Boa! Petróleo, gás natural e carvão mineral são os combustíveis fósseis.',
+     no:'Os combustíveis fósseis são: petróleo, gás natural e carvão mineral.'},
+    {q:'Por que o petróleo é um recurso NÃO renovável?',
+     o:['Porque é líquido','Porque a natureza leva milhões de anos para formá-lo e ele pode se esgotar','Porque é barato','Porque se renova todo dia'],c:1,
+     ok:'Exato! Leva milhões de anos para se formar, por isso pode acabar.',
+     no:'É não renovável porque leva milhões de anos para se formar e pode se esgotar.'}
+  ]
+},
+{
+  cor:'--c8', emoji:'🏭', titulo:'Missão 8 — Impactos humanos: poluição e efeito estufa',
+  texto:`Muitas atividades humanas causam <b>impactos negativos</b> no ambiente:
+  <br><br>• <b>Poluição da água</b>: esgoto sem tratamento, excesso de <b>defensivos agrícolas</b>, mineração (o <b>mercúrio</b> usado no ouro contamina os rios; o rompimento de <b>barragens de rejeitos</b>, como em Mariana-2015), microfibras da indústria têxtil e o descarte incorreto de resíduos (que solta <b>microplásticos</b> no mar).
+  <br>• <b>Poluição do ar</b>: queimadas, decomposição do lixo em lixões e <b>queima de combustíveis</b>. Isso solta <b>gás carbônico</b> e <b>gás metano</b>, que aumentam o efeito estufa.
+  <br><br><b>Atenção, pegadinha!</b> O <b>efeito estufa</b> é um fenômeno <b>NATURAL e importante</b>: ele mantém a temperatura da Terra estável. O problema é o <b>excesso</b> de gases, que <b>intensifica</b> o efeito estufa e causa o <b>aquecimento global</b> (derretimento de geleiras, aumento do nível do mar, tempestades e secas). O <b>desmatamento</b> piora tudo, porque menos plantas sobram para absorver o gás carbônico na fotossíntese.
+  <br><br>• <b>Degradação do solo</b>: sem vegetação, a chuva bate direto e arrasta os nutrientes, podendo causar <b>erosão</b> (grandes fendas no solo).`,
+  conceitos:`<b>Efeito estufa:</b> natural e necessário (mantém a temperatura). O EXCESSO de gases causa <b>aquecimento global</b>. • Gases que aumentam: gás carbônico e metano (queima de combustíveis, queimadas). • Desmatamento piora (menos fotossíntese). • <b>Erosão:</b> perda de solo sem vegetação.`,
+  quiz:[
+    {q:'Sobre o EFEITO ESTUFA, o que é correto?',
+     o:['É totalmente ruim e deveria acabar','É natural e importante; o problema é o excesso de gases','Ele resfria a Terra','Não existe'],c:1,
+     ok:'Certo! O efeito estufa é natural e mantém a temperatura. O problema é o excesso.',
+     no:'Cuidado com a pegadinha: o efeito estufa é natural e importante — o problema é o EXCESSO de gases.'},
+    {q:'Qual atividade humana AUMENTA o efeito estufa?',
+     o:['Plantar árvores','Queimar combustíveis fósseis','Andar de bicicleta','Economizar água'],c:1,
+     ok:'Isso! A queima de combustíveis solta gás carbônico e metano em excesso.',
+     no:'Queimar combustíveis fósseis solta gases (carbônico e metano) que aumentam o efeito estufa.'},
+    {q:'Por que o DESMATAMENTO piora o aquecimento global?',
+     o:['Porque as árvores esquentam o ar','Porque sobram menos plantas para absorver o gás carbônico','Porque o solo fica bonito','Não tem relação'],c:1,
+     ok:'Boa! Sem árvores, o gás carbônico se acumula mais rápido na atmosfera.',
+     no:'As plantas absorvem gás carbônico na fotossíntese; sem elas, esse gás se acumula.'}
+  ]
+},
+{
+  cor:'--c9', emoji:'💧', titulo:'Missão 9 — Tratamento da água, do esgoto e saneamento',
+  texto:`O <b>saneamento básico</b> é um direito do cidadão e cuida da nossa saúde. Ele inclui: <b>água tratada</b>, <b>coleta e tratamento do esgoto</b>, <b>coleta de resíduos</b>, <b>limpeza urbana</b> e a captação das águas da chuva.
+  <br><br><b>Tratamento da água</b> (para beber): retira as impurezas e os microrganismos. Nas etapas finais, o <b>cloro</b> é adicionado para <b>eliminar os microrganismos</b> que causam doenças, e o <b>flúor</b> para ajudar a <b>prevenir cáries</b>. Depois a água vai para reservatórios e chega às casas.
+  <br><br><b>Tratamento do esgoto</b>: passa por grades e caixa de areia, decantadores e um <b>tanque de aeração</b>, onde <b>microrganismos</b> se alimentam da matéria orgânica. No fim, a água já está quase limpa e volta aos rios — mas <b>não pode ser usada para beber</b>. Ela serve para limpar ruas e irrigar jardins.
+  <br><br>No Brasil, só um pouco mais da <b>metade</b> da população tem coleta de esgoto — por isso, muito esgoto ainda vai sem tratamento para os rios.`,
+  conceitos:`<b>Saneamento básico:</b> água tratada + esgoto + coleta de lixo + limpeza urbana + águas da chuva. • <b>Cloro:</b> elimina microrganismos. • <b>Flúor:</b> previne cáries. • Água tratada do esgoto NÃO serve para beber (só limpeza/irrigação).`,
+  quiz:[
+    {q:'Para que serve o CLORO adicionado no tratamento da água?',
+     o:['Para deixar a água azul','Para eliminar os microrganismos que causam doenças','Para prevenir cáries','Para gelar a água'],c:1,
+     ok:'Certo! O cloro elimina os microrganismos. (O flúor é que previne cáries.)',
+     no:'O cloro serve para eliminar microrganismos. Quem previne cáries é o flúor.'},
+    {q:'O que faz parte do SANEAMENTO BÁSICO?',
+     o:['Só a energia elétrica','Água tratada, coleta e tratamento de esgoto e coleta de lixo','Só a internet','Só o transporte'],c:1,
+     ok:'Boa! Saneamento básico cuida da água, do esgoto, do lixo e da limpeza urbana.',
+     no:'Saneamento básico inclui água tratada, esgoto tratado, coleta de resíduos e limpeza urbana.'},
+    {q:'A água que sai do tratamento de ESGOTO pode ser bebida?',
+     o:['Sim, pode beber sem problema','Não; ela volta ao rio, mas serve para limpeza e irrigação','Sim, se ferver','Nunca é devolvida ao ambiente'],c:1,
+     ok:'Isso! Ela fica quase limpa, mas não serve para beber — só limpeza e irrigação.',
+     no:'Não. A água do esgoto tratada volta ao rio e serve para limpeza e irrigação, mas não para beber.'}
+  ]
+},
+{
+  cor:'--c5', emoji:'🌎', titulo:'Missão 10 — Uso sustentável dos recursos',
+  texto:`Usar os recursos de forma <b>sustentável</b> significa atender às nossas necessidades <b>hoje</b> sem que faltem recursos para as <b>futuras gerações</b>. Veja algumas ações de Guardião(ã):
+  <br><br>• <b>Reduzir combustíveis fósseis</b>: usar transporte coletivo, andar de bicicleta ou a pé, preferir combustíveis renováveis (como o <b>etanol</b>, da cana-de-açúcar) e energia <b>solar</b> e <b>eólica</b>.
+  <br>• <b>Evitar o desperdício de água</b>: banho mais curto, fechar a torneira ao escovar os dentes, reaproveitar a água da máquina de lavar.
+  <br>• <b>Evitar a poluição</b>: usar detergente biodegradável, não jogar óleo na pia, descartar os resíduos corretamente.
+  <br>• <b>Evitar o desmatamento</b>: consumir de forma consciente e apoiar organizações que protegem o ambiente.`,
+  conceitos:`<b>Sustentável:</b> atender às necessidades de hoje sem faltar para as futuras gerações. • <b>Energias renováveis:</b> solar, eólica, etanol. • Economizar água, não jogar óleo na pia, evitar o desmatamento.`,
+  quiz:[
+    {q:'Qual destas é uma fonte de energia RENOVÁVEL e mais sustentável?',
+     o:['Carvão mineral','Energia solar','Petróleo','Gás natural'],c:1,
+     ok:'Boa! A energia solar é renovável e não polui como os combustíveis fósseis.',
+     no:'A energia solar é renovável. Carvão, petróleo e gás natural são fósseis (não renováveis).'},
+    {q:'Qual atitude ajuda a EVITAR O DESPERDÍCIO de água?',
+     o:['Tomar banhos bem longos','Fechar a torneira ao escovar os dentes','Deixar a torneira pingando','Lavar o quintal com mangueira ligada o dia todo'],c:1,
+     ok:'Certo! Fechar a torneira ao escovar os dentes economiza muita água.',
+     no:'Fechar a torneira ao escovar os dentes evita o desperdício de água.'},
+    {q:'O que significa usar os recursos de forma SUSTENTÁVEL?',
+     o:['Usar tudo rápido, sem pensar','Atender às necessidades de hoje sem faltar para as futuras gerações','Nunca usar nada da natureza','Comprar sempre o mais barato'],c:1,
+     ok:'Isso! Sustentável é cuidar para que não falte recurso para quem vem depois.',
+     no:'Sustentável é atender às necessidades de hoje sem faltar recursos para as futuras gerações.'}
+  ]
+},
+{
+  cor:'--rev', emoji:'🏆', titulo:'Missão Final — Treino do Guardião (tudo misturado!)',
+  texto:`Chegou a hora de mostrar tudo o que você aprendeu, Guardião(ã)! Leia com calma e responda. Se errar, sem problema: leia a dica e siga em frente. 💪`,
+  conceitos:`Dicas de ouro: <b>resíduo</b> pode ser reaproveitado; <b>aterro sanitário</b> é o mais seguro; <b>compostagem</b> vira adubo; ordem = Extração→Fabricação→Transporte→Consumo→Descarte; <b>efeito estufa</b> é natural (o problema é o excesso); <b>água/sol/vento</b> = renováveis.`,
+  quiz:[
+    {q:'Garrafas plásticas usadas que ainda podem virar novos produtos são um exemplo de...',
+     o:['Rejeito','Resíduo','Chorume','Combustível fóssil'],c:1,
+     ok:'Boa! Como podem ser reaproveitadas, são resíduos (não rejeitos).',
+     no:'Se ainda podem ser recicladas, são resíduos. Rejeito é o que não pode mais ser reaproveitado.'},
+    {q:'Uma cidade quer descartar o lixo com o MENOR prejuízo ao ambiente. O melhor destino é:',
+     o:['Um lixão a céu aberto','Um aterro sanitário','Jogar no rio','Deixar na rua'],c:1,
+     ok:'Certo! O aterro sanitário protege o solo e trata o chorume e o metano.',
+     no:'O aterro sanitário é o mais seguro: solo impermeável e coleta de chorume e metano.'},
+    {q:'Pilhas e restos de comida devem ir para o MESMO lugar?',
+     o:['Sim, tudo junto','Não: restos de comida podem ser compostados; pilhas vão a posto específico','Sim, os dois no rio','Não: os dois vão para a reciclagem de papel'],c:1,
+     ok:'Isso! Orgânico vai para compostagem; pilha é perigosa e vai a posto de coleta.',
+     no:'Não! Restos de comida = compostagem (orgânico). Pilhas = resíduo perigoso, posto específico.'},
+    {q:'O uso de energia SOLAR e EÓLICA ajuda o planeta porque...',
+     o:['São fontes renováveis e poluem menos que os combustíveis fósseis','Nunca acabam e são de graça para sempre','Aumentam o efeito estufa','Gastam muito petróleo'],c:0,
+     ok:'Boa! Sol e vento são renováveis e ajudam a reduzir a queima de combustíveis fósseis.',
+     no:'Sol e vento são renováveis e poluem bem menos que os combustíveis fósseis.'}
+  ]
+}
+];
+
+/* ===== MONTAGEM ===== */
+let totalPerguntas = 0, respondidas = 0, estrelas = 0;
+const cont = document.getElementById('blocos');
+
+blocos.forEach((b, bi)=>{
+  const div = document.createElement('div');
+  div.className = 'bloco';
+  div.style.setProperty('--cor', `var(${b.cor})`);
+  let quizHtml = `<div class="quiz"><h4>🛡️ Hora do desafio!</h4>`;
+  b.quiz.forEach((p, pi)=>{
+    totalPerguntas++;
+    let opc = p.o.map((t,oi)=>`<button class="opc" onclick="resp(this,${bi},${pi},${oi},${p.c})">${t}</button>`).join('');
+    quizHtml += `<div class="pergunta" id="p${bi}_${pi}"><p>${pi+1}) ${p.q}</p>${opc}<div class="fb" id="fb${bi}_${pi}"></div></div>`;
+  });
+  quizHtml += `</div>`;
+  div.innerHTML = `
+    <div class="cab" onclick="toggle(this)">
+      <span class="emoji">${b.emoji}</span>
+      <h2>${b.titulo}</h2>
+      <span class="seta">▶</span>
+    </div>
+    <div class="corpo">
+      <p>${b.texto}</p>
+      <div class="conceitos"><h3>🎒 Palavras e conceitos importantes</h3><p>${b.conceitos}</p></div>
+      ${quizHtml}
+    </div>`;
+  cont.appendChild(div);
+});
+
+document.getElementById('total').textContent = totalPerguntas;
+
+function toggle(cab){ cab.parentElement.classList.toggle('aberto'); }
+
+const jaResp = {};
+function resp(btn, bi, pi, escolha, certa){
+  const key = bi+'_'+pi;
+  if(jaResp[key]) return;
+  jaResp[key] = true;
+  respondidas++;
+  const fb = document.getElementById('fb'+key);
+  const dados = blocos[bi].quiz[pi];
+  const botoes = btn.parentElement.querySelectorAll('.opc');
+  if(escolha === certa){
+    btn.classList.add('certa');
+    fb.className = 'fb ok';
+    fb.textContent = '✅ ' + dados.ok;
+    estrelas++;
+  } else {
+    btn.classList.add('errada');
+    botoes[certa].classList.add('certa');
+    fb.className = 'fb no';
+    fb.textContent = '💡 ' + dados.no;
+  }
+  botoes.forEach(b=>b.style.cursor='default');
+  atualiza();
+}
+
+function atualiza(){
+  document.getElementById('ganhas').textContent = estrelas;
+  document.getElementById('barra').style.width = (respondidas/totalPerguntas*100)+'%';
+  if(respondidas === totalPerguntas){
+    const fim = document.getElementById('fim');
+    fim.classList.add('show');
+    let msg;
+    const pct = estrelas/totalPerguntas;
+    if(pct===1) msg = `PERFEITO! Você conquistou TODAS as ${totalPerguntas} medalhas! 🌟 Você é um(a) verdadeiro(a) Guardião(ã) do Planeta!`;
+    else if(pct>=0.7) msg = `Muito bem! Você ganhou ${estrelas} de ${totalPerguntas} medalhas. Está quase pronto(a) — revise as dicas e arrasa na prova! 💪`;
+    else msg = `Você ganhou ${estrelas} de ${totalPerguntas} medalhas. Que tal abrir as missões de novo e reler as caixinhas amarelas? Você consegue! 🤗`;
+    document.getElementById('fimMsg').textContent = msg;
+    fim.scrollIntoView({behavior:'smooth'});
+  }
+}
+
+/* abre a primeira missão automaticamente */
+cont.firstElementChild.classList.add('aberto');
+</script>
+</body>
+</html>
